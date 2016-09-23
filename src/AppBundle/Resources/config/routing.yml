@@ -2,15 +2,13 @@ list:
   path: /
   defaults: { _controller: AppBundle:Workshop:list }
 
-register:
-  path: /register/{id}
-  defaults: { _controller: AppBundle:Workshop:register }
-  requirements:
-    id: \d+
+workshop:
+  path: /{id}
+  defaults: { _controller: AppBundle:Workshop:workshop }
 
-attendee:
-  path: /attendee/{id}
-  defaults: { _controller: AppBundle:Workshop:attendee }
+register:
+  path: /{id}/register
+  defaults: { _controller: AppBundle:Workshop:register }
   requirements:
     id: \d+
 

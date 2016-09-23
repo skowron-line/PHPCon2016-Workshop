@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {% include 'Workshop/workshop_bare.html.twig' with {
+        'workshop': workshop,
+        'fullDescription': true
+    } only %}
+
+    <p><span style="font-weight: bold">Available seats:</span> {{ workshop.availableSeats }}, <span style="font-weight: bold">Seats left:</span> {{ workshop | seatsLeft }}</p>
+
+    {% if (workshop | seatsLeft) > 0 %}
+        <p><a class="btn btn-lg btn-success" href="{{ url('register', {
+                'id': workshop.id
+            }) }}" role="button">Register</a></p>
+    {% endif %}
+
+    {{ render(controller('AppBundle:Workshop:attendees', {
+        'id': workshop.id
+    })) }}
+{% endblock %}

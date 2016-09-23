@@ -20,10 +20,15 @@ class WorkshopController extends Controller
      */
     public function listAction(Request $request)
     {
+        $workshops = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Workshop')
+            ->findAll();
+
         return $this->render(
             'Workshop/list.html.twig',
             [
-
+                'workshops' => $workshops,
             ]
         );
     }
@@ -34,7 +39,38 @@ class WorkshopController extends Controller
      *
      * @return Response
      */
-    public function registerAction(Workshop $workshop, Request $request)
+    public function workshopAction(Workshop $workshop, Request $request)
+    {
+        $template = 'workshop';
+        if ('/_fragment' === $request->getPathInfo()) {
+            $template = 'workshop_bare';
+        }
+
+        $attendees = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Attendee')
+            ->findBy(
+                [
+                    'workshop' => $workshop,
+                ]
+            );
+
+        return $this->render(
+            sprintf('Workshop/%s.html.twig', $template),
+            [
+                'workshop' => $workshop,
+                'attendees' => $attendees,
+            ]
+        );
+    }
+
+    /**
+     * @param Workshop $workshop
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function registerAction(Workshop $workshop)
     {
         return $this->render(
             'Workshop/register.html.twig',
@@ -46,16 +82,25 @@ class WorkshopController extends Controller
 
     /**
      * @param Workshop $workshop
-     * @param Request $request
      *
      * @return Response
      */
-    public function attendeeAction(Workshop $workshop, Request $request)
+    public function attendeesAction(Workshop $workshop)
     {
+        $attendees = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Attendee')
+            ->findBy(
+                [
+                    'workshop' => $workshop,
+                ]
+            );
+
         return $this->render(
             'Workshop/attendee.html.twig',
             [
                 'workshop' => $workshop,
+                'attendees' => $attendees,
             ]
         );
     }

@@ -1,0 +1,18 @@
+services:
+
+  workshop.services:
+    class: AppBundle\Service\WorkshopService
+    arguments: ["@doctrine.orm.entity_manager"]
+
+  workshop.service.twig_extension:
+    class: AppBundle\Twig\Extension\WorkshopExtension
+    public: false
+    arguments: ["@workshop.services"]
+    tags:
+      - { name: twig.extension }
+
+  workshop.string.twig_extension:
+    class: AppBundle\Twig\Extension\StringExtension
+    public: false
+    tags:
+      - { name: twig.extension }

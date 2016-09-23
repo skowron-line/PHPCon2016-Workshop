@@ -1,3 +1,7 @@
+welcome:
+  path: /
+  defaults: { _controller: FrameworkBundle:Template:template, template: 'base.html.twig' }
+
 app:
   resource: '@AppBundle/Resources/config/routing.yml'
   prefix: 'workshop'

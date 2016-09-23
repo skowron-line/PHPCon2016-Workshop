@@ -1,0 +1,3 @@
+<h4><a href="{{ url('workshop', {'id': workshop.id}) }}">{{ workshop.title }}</a></h4>
+<p>{% if fullDescription is defined %}{{ workshop.description }}{% else %}{{ workshop.description | truncate(300) }}{% endif %}</p>
+<p><span style="font-weight: bold">Prowadzący:</span> {{ workshop.speaker.firstName ~ ' ' ~ workshop.speaker.lastName }} </p>

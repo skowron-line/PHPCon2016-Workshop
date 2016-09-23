@@ -39,6 +39,24 @@ class Workshop
     protected $duration;
 
     /**
+     * @var Speaker
+     */
+    protected $speaker;
+
+    /**
+     * @var boolean
+     */
+    protected $display;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getTitle()
@@ -118,5 +136,36 @@ class Workshop
         $this->duration = $duration;
     }
 
-    
+    /**
+     * @return Speaker
+     */
+    public function getSpeaker()
+    {
+        return $this->speaker;
+    }
+
+    /**
+     * @param Speaker $speaker
+     */
+    public function setSpeaker(Speaker $speaker)
+    {
+        $this->speaker = $speaker;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDisplay()
+    {
+        return $this->display;
+    }
+
+    /**
+     * @param boolean $display
+     */
+    public function setDisplay($display)
+    {
+        $this->display = $display;
+    }
+
 }

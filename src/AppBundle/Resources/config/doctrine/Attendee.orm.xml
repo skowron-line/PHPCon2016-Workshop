@@ -2,7 +2,7 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="AppBundle\Entity\Attendee" table="attende">
+    <entity name="AppBundle\Entity\Attendee" table="attendee" repository-class="AppBundle\Repository\AttendeeRepository">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
