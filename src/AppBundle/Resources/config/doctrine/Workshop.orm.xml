@@ -1,0 +1,15 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="AppBundle\Entity\Workshop" table="workshop">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="title" type="string" />
+        <field name="description" type="string" />
+        <field name="availableSeats" type="integer" column-definition="int unsigned not null default 0" nullable="false" />
+        <field name="startsAt" type="datetime" />
+        <field name="duration" type="integer" column-definition="int unsigned not null default 0" nullable="false" />
+    </entity>
+</doctrine-mapping>

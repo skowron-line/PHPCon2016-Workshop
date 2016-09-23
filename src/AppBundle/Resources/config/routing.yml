@@ -1,0 +1,16 @@
+list:
+  path: /
+  defaults: { _controller: AppBundle:Workshop:list }
+
+register:
+  path: /register/{id}
+  defaults: { _controller: AppBundle:Workshop:register }
+  requirements:
+    id: \d+
+
+attendee:
+  path: /attendee/{id}
+  defaults: { _controller: AppBundle:Workshop:attendee }
+  requirements:
+    id: \d+
+
