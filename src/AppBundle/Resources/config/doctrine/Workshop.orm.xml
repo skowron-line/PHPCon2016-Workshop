@@ -7,7 +7,7 @@
             <generator strategy="AUTO"/>
         </id>
         <field name="title" type="string" />
-        <field name="description" type="string" />
+        <field name="description" type="text" />
         <field name="availableSeats" type="integer" column-definition="int unsigned not null default 0" nullable="false" />
         <field name="startsAt" type="datetime" />
         <field name="duration" type="integer" column-definition="int unsigned not null default 0" nullable="false" />

@@ -9,6 +9,6 @@
         <field name="firstName" type="string"/>
         <field name="lastName" type="string"/>
         <field name="email" type="string"/>
-        <field name="about" type="string"/>
+        <field name="about" type="text"/>
     </entity>
 </doctrine-mapping>
