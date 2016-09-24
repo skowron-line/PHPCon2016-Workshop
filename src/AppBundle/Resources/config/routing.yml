@@ -11,4 +11,3 @@ register:
   defaults: { _controller: AppBundle:Workshop:register }
   requirements:
     id: \d+
-

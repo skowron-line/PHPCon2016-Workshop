@@ -1,3 +1,12 @@
 <h4><a href="{{ url('workshop', {'id': workshop.id}) }}">{{ workshop.title }}</a></h4>
 <p>{% if fullDescription is defined %}{{ workshop.description }}{% else %}{{ workshop.description | truncate(300) }}{% endif %}</p>
-<p><span style="font-weight: bold">Prowadzący:</span> {{ workshop.speaker.firstName ~ ' ' ~ workshop.speaker.lastName }} </p>
+<p><span style="font-weight: bold">Prowadzący:</span> {{ workshop.speaker.firstName ~ ' ' ~ workshop.speaker.lastName }}
+</p>
+
+{% if is_granted('ROLE_ADMIN') %}
+    {% if workshop.display %}
+        <p><a class="btn btn-lg btn-error" href="#" role="button">Disable Registration</a></p>
+    {% else %}
+        <p><a class="btn btn-lg btn-error" href="#" role="button">Enable Registration</a></p>
+    {% endif %}
+{% endif %}

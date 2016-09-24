@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {{ form_start(createForm) }}
+        <div class="form-group">
+            <label for="exampleInputEmail1">Title</label>
+            {{ form_widget(createForm.title, {
+                'attr': {
+                    'class' : 'form-control'
+                }
+            }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Description</label>
+            {{ form_widget(createForm.description, {
+                'attr': {
+                    'class' : 'form-control'
+                }
+            }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Available Seats</label>
+            {{ form_widget(createForm.availableSeats, {
+                'attr': {
+                    'class' : 'form-control'
+                }
+            }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Starts At</label>
+            {{ form_widget(createForm.startsAt, {
+                'attr': {
+                    'class' : 'form-control'
+                }
+            }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Duration</label>
+            {{ form_widget(createForm.duration, {
+                'attr': {
+                    'class' : 'form-control'
+                }
+            }) }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Speaker</label>
+            {{ form_widget(createForm.speaker, {
+                'placeholder': 'Choose',
+                'attr': {
+                    'class' : 'form-control'
+                }
+            }) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(createForm.submit, {
+                'label': 'Save',
+                'attr': {
+                    'class' : 'btn btn-success'
+                }
+            }) }}
+        </div>
+    {{ form_rest(createForm) }}
+{% endblock %}

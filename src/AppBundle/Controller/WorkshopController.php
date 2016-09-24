@@ -3,7 +3,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Attendee;
 use AppBundle\Entity\Workshop;
+use AppBundle\Form\Type\CreateType;
+use AppBundle\Form\Type\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +16,30 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class WorkshopController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function createAction(Request $request)
+    {
+        $workshop = new Workshop();
+        $createForm = $this->createForm(
+            CreateType::class,
+            $workshop,
+            [
+                'entityManager' => $this->get('doctrine.orm.entity_manager'),
+            ]
+        );
+
+        return $this->render(
+            'Workshop/create.html.twig',
+            [
+                'createForm' => $createForm->createView(),
+            ]
+        );
+    }
+
     /**
      * @param Request $request
      *
@@ -72,10 +99,21 @@ class WorkshopController extends Controller
      */
     public function registerAction(Workshop $workshop)
     {
+        $attendee = new Attendee();
+
+        $registrationForm = $this->createForm(
+            RegisterType::class,
+            $attendee,
+            [
+                'entityManager' => $this->get('doctrine.orm.entity_manager'),
+            ]
+        );
+
         return $this->render(
             'Workshop/register.html.twig',
             [
                 'workshop' => $workshop,
+                'form' => $registrationForm->createView(),
             ]
         );
     }
