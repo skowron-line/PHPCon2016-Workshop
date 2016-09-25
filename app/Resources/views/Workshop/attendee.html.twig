@@ -1,3 +1,23 @@
-<table>
-
+<h4>Attendees</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td></td>
+            <td>First name</td>
+            <td>Last name</td>
+            <td>Email</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% set ordinal = 0 %}
+        {% for attende in attendees %}
+            {% set ordinal = ordinal + 1 %}
+            <tr>
+                <td>{{ ordinal }}</td>
+                <td>{{ attende.firstName }}</td>
+                <td>{{ attende.lastName }}</td>
+                <td>{{ attende.email }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
 </table>

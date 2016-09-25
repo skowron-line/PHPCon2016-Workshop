@@ -16,14 +16,24 @@ class Attendee
     protected $id;
 
     /**
-     * @var Application
-     */
-    protected $attendee;
-
-    /**
      * @var Workshop
      */
     protected $workshop;
+
+    /**
+     * @var string
+     */
+    protected $firstName;
+
+    /**
+     * @var string
+     */
+    protected $lastName;
+
+    /**
+     * @var string
+     */
+    protected $email;
 
     /**
      * @return int
@@ -32,23 +42,6 @@ class Attendee
     {
         return $this->id;
     }
-
-    /**
-     * @return \AppBundle\Entity\Application
-     */
-    public function getAttendee()
-    {
-        return $this->attendee;
-    }
-
-    /**
-     * @param \AppBundle\Entity\Application $attendee
-     */
-    public function setAttendee($attendee)
-    {
-        $this->attendee = $attendee;
-    }
-
     /**
      * @return Workshop
      */
@@ -63,6 +56,54 @@ class Attendee
     public function setWorkshop($workshop)
     {
         $this->workshop = $workshop;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
 }

@@ -6,7 +6,10 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
-        <one-to-one field="attendee" target-entity="AppBundle\Entity\Application" />
-        <one-to-one field="workshop" target-entity="AppBundle\Entity\Workshop" />
+        <field name="firstName" type="string" />
+        <field name="lastName" type="string" />
+        <field name="email" type="string" />
+
+        <many-to-one target-entity="AppBundle\Entity\Workshop" field="workshop" />
     </entity>
 </doctrine-mapping>

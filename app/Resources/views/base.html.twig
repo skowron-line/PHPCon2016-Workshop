@@ -23,10 +23,13 @@
     <div class="container">
         <div class="header clearfix">
             <nav>
-                {#<ul class="nav nav-pills pull-right">#}
-                    {#<li role="presentation"><a href="#">8</a></li>#}
-                    {#<li role="presentation"><a href="#">300</a></li>#}
-                {#</ul>#}
+                <ul class="nav nav-pills pull-right">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li role="presentation"><a href="{{ url('fos_user_security_logout') }}">Logout</a></li>
+                    {% else %}
+                        <li role="presentation"><a href="{{ url('fos_user_security_login') }}">Login</a></li>
+                    {% endif %}
+                </ul>
             </nav>
             <h3 class="text-muted"><a href="{{ url('list') }}">Workshop registration</a></h3>
         </div>
