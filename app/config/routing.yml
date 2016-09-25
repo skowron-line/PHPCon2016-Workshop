@@ -9,3 +9,6 @@ create:
 app:
   resource: '@AppBundle/Resources/config/routing.yml'
   prefix: 'workshop'
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

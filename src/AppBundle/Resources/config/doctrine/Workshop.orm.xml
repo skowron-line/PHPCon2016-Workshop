@@ -13,6 +13,6 @@
         <field name="duration" type="integer" column-definition="int unsigned not null default 0" />
         <field name="display" type="integer" column-definition="tinyint unsigned not null default 1" />
 
-        <one-to-one field="speaker" target-entity="AppBundle\Entity\Speaker" />
+        <many-to-one target-entity="AppBundle\Entity\Speaker" field="speaker" />
     </entity>
 </doctrine-mapping>
