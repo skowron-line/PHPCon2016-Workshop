@@ -10,8 +10,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class WorkshopRepository extends EntityRepository
 {
-    public function isRegistrationClosed()
-    {
-        return false;
-    }
+
 }
