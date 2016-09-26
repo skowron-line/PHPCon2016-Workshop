@@ -5,8 +5,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Attendee;
 use AppBundle\Entity\Workshop;
+use AppBundle\Events\AttendeeAddedEvent;
+use AppBundle\Form\Dto\RegisterDto;
 use AppBundle\Form\Type\CreateType;
 use AppBundle\Form\Type\RegisterType;
+use AppBundle\WorkshopEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -97,23 +100,64 @@ class WorkshopController extends Controller
      *
      * @return Response
      */
-    public function registerAction(Workshop $workshop)
+    public function registerAction(Workshop $workshop, Request $request)
     {
-        $attendee = new Attendee();
+        $registerDto = new RegisterDto();
+        $registerDto->setWorkshop($workshop);
 
         $registrationForm = $this->createForm(
             RegisterType::class,
-            $attendee,
+            $registerDto,
             [
                 'entityManager' => $this->get('doctrine.orm.entity_manager'),
             ]
         );
 
+        if (true === $request->isMethod('POST')) {
+
+            $registrationForm->handleRequest($request);
+
+            if (true === $registrationForm->isValid()) {
+
+                $attendee = new Attendee();
+                $attendee->setWorkshop($registerDto->getWorkshop());
+                $attendee->setFirstName($registerDto->getApplication()->getFirstName());
+                $attendee->setLastName($registerDto->getApplication()->getLastName());
+                $attendee->setEmail($registerDto->getApplication()->getEmail());
+
+                $manager = $this
+                    ->getDoctrine()
+                    ->getManager();
+
+                $manager->persist($attendee);
+                $manager->flush();
+
+                $this
+                    ->get('session')
+                    ->getFlashBag()
+                    ->add(
+                        'success',
+                        sprintf('You have been successfully registered to "%s" workshop', $workshop->getTitle())
+                    );
+
+                $this
+                    ->get('event_dispatcher')
+                    ->dispatch(WorkshopEvents::ATTENDEE_ADDED, new AttendeeAddedEvent($workshop, $attendee));
+
+                return $this->redirectToRoute(
+                    'workshop',
+                    [
+                        'id' => $workshop->getId(),
+                    ]
+                );
+            }
+        }
+
         return $this->render(
             'Workshop/register.html.twig',
             [
                 'workshop' => $workshop,
-                'form' => $registrationForm->createView(),
+                'registrationForm' => $registrationForm->createView(),
             ]
         );
     }

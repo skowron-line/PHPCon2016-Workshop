@@ -1,0 +1,12 @@
+AppBundle\Form\Dto\RegisterDto:
+  properties:
+    workshop:
+      - AppBundle\Validator\Constraints\AreSeatsAvailable: ~
+
+    application:
+      - NotBlank: ~
+      - AppBundle\Validator\Constraints\ApplicationExists: ~
+      - AppBundle\Validator\Constraints\IsPaid: ~
+
+  constraints:
+    - AppBundle\Validator\Constraints\AlreadyRegistered: ~

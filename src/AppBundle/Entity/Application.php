@@ -34,6 +34,14 @@ class Application
     protected $isPaid;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getFirstName()
@@ -86,7 +94,7 @@ class Application
      */
     public function isPaid()
     {
-        return $this->isPaid;
+        return (boolean) $this->isPaid;
     }
 
     /**
@@ -94,7 +102,7 @@ class Application
      */
     public function setIsPaid($isPaid)
     {
-        $this->isPaid = $isPaid;
+        $this->isPaid = (boolean) $isPaid;
     }
 
 }

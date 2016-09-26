@@ -3,10 +3,12 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Entity\Attendee;
+use AppBundle\Form\Dto\RegisterDto;
+use AppBundle\Form\Transformer\EmailToApplicationTransformer;
 use AppBundle\Form\Transformer\WorkshopTransformer;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,11 +25,20 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('workshop', HiddenType::class)
-            ->add('attendee')
-            ->add('register', SubmitType::class)
-            ->get('workshop')
-            ->addModelTransformer(new WorkshopTransformer($options['entityManager']));
+            ->add(
+                $builder
+                    ->create('workshop', HiddenType::class)
+                    ->addModelTransformer(new WorkshopTransformer($options['entityManager']))
+            )
+            ->add(
+                $builder
+                    ->create(
+                        'application',
+                        EmailType::class
+                    )
+                    ->addModelTransformer(new EmailToApplicationTransformer($options['entityManager']))
+            )
+            ->add('submit', SubmitType::class);
     }
 
     /**
@@ -46,7 +57,7 @@ class RegisterType extends AbstractType
             ->setDefaults
             (
                 [
-                    'data_class' => Attendee::class,
+                    'data_class' => RegisterDto::class,
                 ]
             );
     }

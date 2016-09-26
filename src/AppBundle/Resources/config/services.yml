@@ -22,3 +22,15 @@ services:
     arguments: ["@service_container", "@doctrine.orm.entity_manager"]
     tags:
      - { name: console.command }
+
+  workshop.available_seats.validator:
+    class: AppBundle\Validator\Constraints\AreSeatsAvailableValidator
+    arguments: ["@workshop.services"]
+    tags:
+      - { name: validator.constraint_validator }
+
+  workshop.already_registered.validator:
+    class: AppBundle\Validator\Constraints\AlreadyRegisteredValidator
+    arguments: ["@doctrine.orm.entity_manager"]
+    tags:
+      - { name: validator.constraint_validator }
