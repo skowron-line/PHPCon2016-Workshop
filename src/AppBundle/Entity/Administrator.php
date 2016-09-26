@@ -8,5 +8,9 @@ namespace AppBundle\Entity;
  */
 class Administrator extends \FOS\UserBundle\Model\User
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->roles = ['ROLE_ADMIN'];
+    }
 }
