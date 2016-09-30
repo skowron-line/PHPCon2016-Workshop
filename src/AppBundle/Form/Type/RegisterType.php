@@ -32,10 +32,7 @@ class RegisterType extends AbstractType
             )
             ->add(
                 $builder
-                    ->create(
-                        'application',
-                        EmailType::class
-                    )
+                    ->create('application', EmailType::class)
                     ->addModelTransformer(new EmailToApplicationTransformer($options['entityManager']))
             )
             ->add('submit', SubmitType::class);
