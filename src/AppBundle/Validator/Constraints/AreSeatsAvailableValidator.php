@@ -33,7 +33,7 @@ class AreSeatsAvailableValidator extends ConstraintValidator
      */
     public function validate($workshop, Constraint $constraint)
     {
-        if ($workshop->getAvailableSeats() > $this->workshopService->seatsLeft($workshop)) {
+        if ($this->workshopService->seatsLeft($workshop) > 0) {
             return;
         }
 
